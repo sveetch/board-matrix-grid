@@ -1,1 +1,4 @@
-board-matrix-grid
+#board-matrix-grid
+sphinx<7.2.0
+sphinx-book-theme
+livereload

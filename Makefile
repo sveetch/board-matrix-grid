@@ -1,11 +1,13 @@
 PYTHON_INTERPRETER=python3
 VENV_PATH=.venv
-PIP=$(VENV_PATH)/bin/pip
-FLAKE=$(VENV_PATH)/bin/flake8
-PYTEST=$(VENV_PATH)/bin/pytest
-SPHINX_RELOAD=$(VENV_PATH)/bin/python sphinx_reload.py
-TOX=$(VENV_PATH)/bin/tox
-TWINE=$(VENV_PATH)/bin/twine
+
+PYTHON_BIN=$(VENV_PATH)/bin/python
+PIP_BIN=$(VENV_PATH)/bin/pip
+FLAKE_BIN=$(VENV_PATH)/bin/flake8
+PYTEST_BIN=$(VENV_PATH)/bin/pytest
+TOX_BIN=$(VENV_PATH)/bin/tox
+TWINE_BIN=$(VENV_PATH)/bin/twine
+SPHINX_RELOAD_BIN=$(PYTHON_BIN) docs/sphinx_reload.py
 
 PACKAGE_NAME=board-matrix-grid
 PACKAGE_SLUG=`echo $(PACKAGE_NAME) | tr '-' '_'`
@@ -67,15 +69,16 @@ venv:
 	@echo ""
 	virtualenv -p $(PYTHON_INTERPRETER) $(VENV_PATH)
 	# This is required for those ones using old distribution
-	$(PIP) install --upgrade pip
-	$(PIP) install --upgrade setuptools
+	$(PIP_BIN) install --upgrade pip
+	$(PIP_BIN) install --upgrade setuptools
 .PHONY: venv
 
 install: venv
 	@echo ""
 	@echo "==== Install everything for development ===="
 	@echo ""
-	$(PIP) install -e .[dev]
+	$(PIP_BIN) install -e .[dev,quality]
+	$(PIP_BIN) install -r docs/requirements.txt
 .PHONY: install
 
 docs:
@@ -89,22 +92,21 @@ livedocs:
 	@echo ""
 	@echo "==== Watching documentation sources ===="
 	@echo ""
-	$(SPHINX_RELOAD)
+	$(SPHINX_RELOAD_BIN)
 .PHONY: livedocs
 
 flake:
 	@echo ""
 	@echo "==== Flake ===="
 	@echo ""
-	$(FLAKE) --show-source $(APPLICATION_NAME)
-	$(FLAKE) --show-source tests
+	$(FLAKE_BIN) --statistics --show-source $(APPLICATION_NAME) tests
 .PHONY: flake
 
 test:
 	@echo ""
 	@echo "==== Tests ===="
 	@echo ""
-	$(PYTEST) -vv tests/
+	$(PYTEST_BIN) -vv tests/
 .PHONY: test
 
 freeze-dependencies:
@@ -140,7 +142,7 @@ tox:
 	@echo ""
 	@echo "==== Launch all Tox environments ===="
 	@echo ""
-	$(TOX)
+	$(TOX_BIN)
 .PHONY: tox
 
 quality: test flake docs check-release freeze-dependencies
