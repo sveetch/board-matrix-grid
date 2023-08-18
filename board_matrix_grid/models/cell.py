@@ -15,6 +15,8 @@ class Cell:
     """
     def __init__(self, index, row=None, tiles=[]):
         # This represent the cell position in a row, we can also call it a column
+        # This may be a weakness since if adding a new cell between other row ones will
+        # requires to reindex all further cells
         self.index = index
         self.row = row
         self.tiles = {
@@ -33,13 +35,18 @@ class Cell:
 
     def add_tile(self, tile):
         """
-        Add a tile to cell
+        Add a tile to cell.
+
+        This automatically add tile into its kind slot into ``Cell.tiles``.
 
         We may use instead a dict for tiles with an item for each level (a level
         could store only a single tile). Tile should define its suitable level since
         Tile type should be stored at any level (example: a grass tile is always a
         land, never a decore or furniture).
+
+        Arguments:
+            tile (Tile): Tile object to add to cell tiles.
+
         """
         tile.cell = self
-        # A list is too much naive type for tiles which would need indexing/ordering
         self.tiles[tile.kind] = tile

@@ -1,4 +1,6 @@
 """
+Board matrix models.
+
 .. Warning::
     Model objets maintain a circular references between them (Cell contains tiles that
     store their related Cell object). So they are not safe for a naive recursive

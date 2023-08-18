@@ -18,7 +18,6 @@ class Tile:
         self.cell = cell
         self.value = value
 
-
     def __repr__(self):
         return "<{klass}: {value}>".format(
             klass=self.__class__.__name__,

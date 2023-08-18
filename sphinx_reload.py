@@ -19,7 +19,19 @@ from livereload import Server, shell
 
 server = Server()
 
-# Watch root documents (not recursive)
+from livereload import Server, shell
+
+
+server = Server()
+
+# Watch documents
+server.watch(
+    "./*.rst",
+    shell(
+        "make html",
+        cwd="docs"
+    )
+)
 server.watch(
     "docs/*.rst",
     shell(
@@ -27,17 +39,15 @@ server.watch(
         cwd="docs"
     )
 )
-
-# Watch application documents
 server.watch(
-    "docs/core/*.rst",
+    "docs/references/*.rst",
     shell(
         "make html",
         cwd="docs"
     )
 )
 
-# Watch Python modules for autodoc review
+# Watch Python modules for autodoc
 server.watch(
     "board_matrix_grid/*.py",
     shell(

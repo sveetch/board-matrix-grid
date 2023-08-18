@@ -7,10 +7,10 @@ def test_model_cell():
     """
     Cell object
     """
-    col = Cell(42)
+    cell = Cell(42)
 
-    assert str(col) == "<Cell: 42>"
-    assert repr(col) == "<Cell: 42>"
+    assert str(cell) == "<Cell: 42>"
+    assert repr(cell) == "<Cell: 42>"
 
 
 def test_model_cell_tiles():
@@ -24,26 +24,26 @@ def test_model_cell_tiles():
     tile_chest = Tile("furniture", "Chest furniture")
 
     # Add some tiles from arguments
-    col_42 = Cell(42, tiles=[tile_grass, tile_stone])
-    col_99 = Cell(99, tiles=[tile_sand])
+    cell_42 = Cell(42, tiles=[tile_grass, tile_stone])
+    cell_99 = Cell(99, tiles=[tile_sand])
 
     # Expected tiles
-    assert col_42.tiles["land"].value == "Grass land"
-    assert col_42.tiles["land"].cell == col_42
-    assert col_42.tiles["decor"].value == "Stone decor"
-    assert col_42.tiles["decor"].cell == col_42
-    assert col_42.tiles["furniture"] == None
+    assert cell_42.tiles["land"].value == "Grass land"
+    assert cell_42.tiles["land"].cell == cell_42
+    assert cell_42.tiles["decor"].value == "Stone decor"
+    assert cell_42.tiles["decor"].cell == cell_42
+    assert cell_42.tiles["furniture"] == None
 
     # Add some other tiles from method
-    col_42.add_tile(tile_sand)
-    col_42.add_tile(tile_chest)
+    cell_42.add_tile(tile_sand)
+    cell_42.add_tile(tile_chest)
 
     # Land kind is overwritten
-    assert col_42.tiles["land"].value == "Sand land"
-    assert col_42.tiles["land"].cell == col_42
+    assert cell_42.tiles["land"].value == "Sand land"
+    assert cell_42.tiles["land"].cell == cell_42
     # Decor is left untouched
-    assert col_42.tiles["decor"].value == "Stone decor"
-    assert col_42.tiles["decor"].cell == col_42
+    assert cell_42.tiles["decor"].value == "Stone decor"
+    assert cell_42.tiles["decor"].cell == cell_42
     # Furniture has been added and its tile cell has been changed
-    assert col_42.tiles["furniture"].value == "Chest furniture"
-    assert col_42.tiles["furniture"].cell == col_42
+    assert cell_42.tiles["furniture"].value == "Chest furniture"
+    assert cell_42.tiles["furniture"].cell == cell_42

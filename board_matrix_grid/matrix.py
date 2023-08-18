@@ -1,17 +1,3 @@
-"""
-.. Note::
-    These classes could be excellent candidates for '__slot__' usage for performance
-    improvements, see:
-
-    https://stackoverflow.com/a/28059785
-
-    TL;DR: Hint, __slot__ usage may be hard to manage with class inheritances, so they
-    should be avoided if possible (at least Row and Cell should not need about it).
-
-"""
-from board_matrix_grid.exceptions import DummyError
-
-
 class Matrix:
     """
     DEPRECATED
