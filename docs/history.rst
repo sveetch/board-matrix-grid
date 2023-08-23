@@ -4,8 +4,7 @@
 History
 =======
 
-Version 0.1.0 - Not packaged
-----------------------------
+Version 0.1.0 - Unreleased
+**************************
 
-First commit started to experiment something with Board, Row, Cell and Tile objects
-just trying to make a proper board matrix.
+* First commit.

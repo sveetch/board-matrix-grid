@@ -1,4 +1,9 @@
-class MyAppBaseException(Exception):
+"""
+Specific application exceptions.
+"""
+
+
+class BoardMatrixGridBaseException(Exception):
     """
     Exception base.
 
@@ -8,8 +13,8 @@ class MyAppBaseException(Exception):
     pass
 
 
-class DummyError(MyAppBaseException):
+class AppOperationError(BoardMatrixGridBaseException):
     """
-    Dummy exception sample to raise from your code.
+    Sample exception to raise from your code.
     """
     pass

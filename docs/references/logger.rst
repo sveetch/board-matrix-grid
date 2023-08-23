@@ -1,6 +1,5 @@
-.. _ref_logging_intro:
+.. _references_logger_intro:
 
-=======
 Logging
 =======
 
